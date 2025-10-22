@@ -1,0 +1,33 @@
+name: Push get task api image to ACR
+
+on: workflow_dispatch
+
+env:
+  ACR_LOGIN_SERVER: acrtodoappdev01.azurecr.io
+  TAG: ${{ github.run_number }}
+  IMAGE_NAME: microtodogettask
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ env.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{env.TAG}} .
+          docker push ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{env.TAG}}
+
+      - name: Update manifest with image details
+        run: |
+            sed -i "s|#__#IMAGE_NAME#__#|${{ env.IMAGE_NAME }}|g" manifests/deployment.yaml
+            sed -i "s|#__#IMAGE_TAG#__#|${{ env.TAG }}|g" manifests/deployment.yaml
