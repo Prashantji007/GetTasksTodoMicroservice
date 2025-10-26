@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: get-tasks
-        image: acrtodoappdev01.azurecr.io/microtodogettask:latest
+        image: acrtodoappdev01.azurecr.io/microtodogettask:8
         imagePullPolicy: Always
         env:
           - name: CONNECTION_STRING
