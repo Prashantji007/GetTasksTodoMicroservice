@@ -3,6 +3,12 @@ kind: Deployment
 metadata:
   name: get-tasks
   namespace: app
+  annotations:
+    # ArgoCD Image Updater configuration
+    argocd-image-updater.argoproj.io/image-list: get-tasks=devopsinsiders/acrtodoappdev01/get-tasks
+    argocd-image-updater.argoproj.io/get-tasks.update-strategy: latest
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/git-branch: main
 spec:
   replicas: 3
   selector:
@@ -15,9 +21,10 @@ spec:
     spec:
       containers:
       - name: get-tasks
+        image: devopsinsiders/acrtodoappdev01/get-tasks:#__#IMAGE_TAG#__#
+        imagePullPolicy: Always
         env:
           - name: CONNECTION_STRING
-            value: "Driver={ODBC Driver 17 for SQL Server};Server=tcp:devopsinsiderssrv.database.windows.net,1433;Database=todoapp;Uid=devopsadmin;Pwd=P@ssw01rd@123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"                                          
-        image: devopsinsiders/#__#IMAGE_NAME#__#:#__#IMAGE_TAG#__#
+            value: "Driver={ODBC Driver 17 for SQL Server};Server=tcp:devopsinsiderssrv.database.windows.net,1433;Database=todoapp;Uid=devopsadmin;Pwd=P@ssw01rd@123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
         ports:
-        - containerPort: 8000
+          - containerPort: 8000
