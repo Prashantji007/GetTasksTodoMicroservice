@@ -19,6 +19,8 @@ spec:
       labels:
         app: get-tasks
     spec:
+      imagePullSecrets:
+        - name: acr-creds
       containers:
       - name: get-tasks
         image: acrtodoappdev01.azurecr.io/microtodogettask:8
