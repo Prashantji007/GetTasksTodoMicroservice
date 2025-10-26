@@ -5,7 +5,7 @@ metadata:
   namespace: app
   annotations:
     # ArgoCD Image Updater configuration
-    argocd-image-updater.argoproj.io/image-list: get-tasks=microtodogettask
+    argocd-image-updater.argoproj.io/image-list: get-tasks=acrtodoappdev01.azurecr.io/microtodogettask
     argocd-image-updater.argoproj.io/get-tasks.update-strategy: latest
     argocd-image-updater.argoproj.io/write-back-method: git
     argocd-image-updater.argoproj.io/git-branch: main
@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: get-tasks
-        image: microtodogettask:#__#IMAGE_TAG#__#
+        image: acrtodoappdev01.azurecr.io/microtodogettask:latest
         imagePullPolicy: Always
         env:
           - name: CONNECTION_STRING
