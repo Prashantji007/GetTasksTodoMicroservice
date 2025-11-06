@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   name: get-tasks-ingress
   namespace: app
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
