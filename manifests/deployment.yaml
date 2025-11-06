@@ -27,6 +27,6 @@ spec:
         imagePullPolicy: Always
         env:
           - name: CONNECTION_STRING
-            value: "Driver={ODBC Driver 17 for SQL Server};Server=tcp:devopsinsiderssrv.database.windows.net,1433;Database=todoapp;Uid=devopsadmin;Pwd=P@ssw01rd@123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+            value: "Driver={Driver={ODBC Driver 18 for SQL Server};Server=tcp:mssqldbserverdev.database.windows.net,1433;Database=sqldbdev;Uid=sqladminuser;Pwd=Test@12345;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
         ports:
           - containerPort: 8000
