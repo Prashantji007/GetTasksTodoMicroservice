@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}-todo-ui
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-todo-ui
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}-todo-ui
+    spec:
+      containers:
+      - name: {{.Release.Name}}-todo-ui
+        #image: acrtodoappdev01.azurecr.io/microtodoui:17
+        image: "acrtodoappdev01.azurecr.io/{{.Values.image}}:{{.Values.tag}}"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: acr-creds
