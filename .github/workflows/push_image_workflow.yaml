@@ -44,15 +44,15 @@ jobs:
           git commit -m "Update image tag to $TAG"
           git push
 
-      - name: Login to ACR for Helm
-        run: echo ${{ secrets.ACR_PASSWORD }} | helm registry login ${{ env.ACR_LOGIN_SERVER }} --username ${{ secrets.ACR_USERNAME }} --password-stdin
+      # - name: Login to ACR for Helm
+      #   run: echo ${{ secrets.ACR_PASSWORD }} | helm registry login ${{ env.ACR_LOGIN_SERVER }} --username ${{ secrets.ACR_USERNAME }} --password-stdin
 
-      - name: Package Helm chart
-        run: |
-          helm package Helm/Get-Task
-          FILE=$(ls *.tgz)
-          echo "PACKAGED_CHART=$FILE" >> $GITHUB_ENV
+      # - name: Package Helm chart
+      #   run: |
+      #     helm package Helm/Get-Task
+      #     FILE=$(ls *.tgz)
+      #     echo "PACKAGED_CHART=$FILE" >> $GITHUB_ENV
       
-      - name: Push Helm Chart to ACR
-        run: |
-          helm push $PACKAGED_CHART oci://${{ env.ACR_LOGIN_SERVER }}/helm/
+      # - name: Push Helm Chart to ACR
+      #   run: |
+      #     helm push $PACKAGED_CHART oci://${{ env.ACR_LOGIN_SERVER }}/helm/
