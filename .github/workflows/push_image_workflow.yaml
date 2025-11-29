@@ -49,7 +49,7 @@ jobs:
           sed -i "s/get-tag:.*/get-tag: $TAG/" gitops-repo/Helm/dev-values.yaml
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-          git add Helm/Get-Task/dev-values.yaml
+          git add gitops-repo/Helm/dev-values.yaml
           git commit -m "Update image tag to $TAG"
           git push
 
