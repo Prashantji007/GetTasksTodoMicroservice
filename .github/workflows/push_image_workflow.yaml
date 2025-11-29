@@ -37,7 +37,7 @@ jobs:
 
       - name: Update Helm values (image tag)
         run: |
-          sed -i "s/tag:.*/tag: $TAG/" Helm/Get-Task/dev-values.yaml
+          sed -i "s/get-tag:.*/get-tag: $TAG/" Helm/Get-Task/dev-values.yaml
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
           git add Helm/Get-Task/dev-values.yaml
