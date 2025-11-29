@@ -35,9 +35,18 @@ jobs:
           sed -i "s|#__#IMAGE_NAME#__#|$IMAGE_NAME|g" manifests/deployment.yaml
           sed -i "s|#__#IMAGE_TAG#__#|$TAG|g" manifests/deployment.yaml
 
+      - name: Checkout target repo
+        uses: actions/checkout@v3
+        with:
+          repository: Prashantji007/Gitops_setup_using_ArgoCD_Helm
+          ref: main
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: gitops-repo
+
+
       - name: Update Helm values (image tag)
         run: |
-          sed -i "s/get-tag:.*/get-tag: $TAG/" Helm/Get-Task/dev-values.yaml
+          sed -i "s/get-tag:.*/get-tag: $TAG/" Helm/dev-values.yaml
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
           git add Helm/Get-Task/dev-values.yaml
