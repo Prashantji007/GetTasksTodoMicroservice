@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 env:
   ACR_LOGIN_SERVER: acrtodoappdev01.azurecr.io
-  TAG: ${{ github.run_number }}
+  TAG: latest #${{ github.run_number }}
   IMAGE_NAME: microtodogettask
 
 jobs:
