@@ -15,7 +15,7 @@ RUN echo "deb [signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.mic
     > /etc/apt/sources.list.d/mssql-release.list
 
 # Install the ODBC driver
-RUN apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17
+RUN apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql18
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
