@@ -32,7 +32,7 @@ class Task(BaseModel):
     description: str
 
 # Create a table for tasks (You can run this once outside of the app)
-@app.get("/")
+@app.get("/api")
 def create_tasks_table():
     try:
         conn = pyodbc.connect(connection_string)
